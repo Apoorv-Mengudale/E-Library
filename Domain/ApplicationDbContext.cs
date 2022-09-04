@@ -7,9 +7,9 @@ namespace Domain
     public class ApplicationDbContext : DbContext
     {
         protected readonly IConfiguration Configuration;
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options,IConfiguration configuration) : base(options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IConfiguration configuration) : base(options)
         {
-                Configuration = configuration;
+            Configuration = configuration;
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -22,5 +22,6 @@ namespace Domain
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Book> Books { get; set; }
     }
 }

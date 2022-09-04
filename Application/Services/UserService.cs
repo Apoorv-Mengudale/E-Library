@@ -13,6 +13,7 @@ namespace Application.Services
         void Register(RegisterRequest model);
         void Update(int id, UpdateRequest model);
         void Delete(int id);
+        IEnumerable<User> _GetUsersPaginated(int pageNumber, int pageSize);
     }
 
     public class UserService : IUserService
@@ -40,9 +41,8 @@ namespace Application.Services
                 throw new AppException("Username or password is incorrect");
 
             // authentication successful
-            var response = _mapper.Map<AuthenticateResponse>(user);
-            response.Token = _jwtUtils.GenerateToken(user);
-            return response;
+            var jwtToken = _jwtUtils.GenerateToken(user);
+            return new AuthenticateResponse(user, jwtToken);
         }
 
         public IEnumerable<User> GetAll()
@@ -104,6 +104,12 @@ namespace Application.Services
             var user = _context.Users.Find(id);
             if (user == null) throw new KeyNotFoundException("User not found");
             return user;
+        }
+
+        public IEnumerable<User> _GetUsersPaginated(int pageNumber, int pageSize)
+        {
+            if (pageNumber == 0) pageNumber = 1;
+            return _context.Users.Skip((pageNumber - 1) * pageSize).Take(pageSize);
         }
     }
 }

@@ -18,7 +18,19 @@ namespace Domain.Models
                 .ForAllMembers(x => x.Condition(
                     (src, dest, prop) =>
                     {
-                    // ignore null & empty string properties
+                        // ignore null & empty string properties
+                        if (prop == null) return false;
+                        if (prop.GetType() == typeof(string) && string.IsNullOrEmpty((string)prop)) return false;
+
+                        return true;
+                    }
+                ));
+
+            CreateMap<UpdateBookRequest, Book>()
+                .ForAllMembers(x => x.Condition(
+                    (src, dest, prop) =>
+                    {
+                        // ignore null & empty string properties
                         if (prop == null) return false;
                         if (prop.GetType() == typeof(string) && string.IsNullOrEmpty((string)prop)) return false;
 

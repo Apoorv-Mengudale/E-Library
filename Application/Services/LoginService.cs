@@ -23,7 +23,6 @@ namespace Application.Services
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -45,7 +44,6 @@ namespace Application.Services
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -66,7 +64,6 @@ namespace Application.Services
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -83,7 +80,6 @@ namespace Application.Services
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -100,7 +96,6 @@ namespace Application.Services
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -116,7 +111,6 @@ namespace Application.Services
             }
             catch (Exception)
             {
-
                 throw;
             }
         }

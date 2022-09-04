@@ -15,5 +15,7 @@ namespace Domain.Models.Users
 
         [Required]
         public string Password { get; set; }
+        [Required]
+        public Role Role { get; set; }
     }
 }

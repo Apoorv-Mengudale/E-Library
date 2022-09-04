@@ -10,7 +10,7 @@ namespace WebAPI.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class UsersController : ControllerBase
     {
         private IUserService _userService;
@@ -43,6 +43,7 @@ namespace WebAPI.Controllers
             return Ok(new { message = "Registration successful" });
         }
 
+        [Authorize(Role.Admin)]
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -50,7 +51,8 @@ namespace WebAPI.Controllers
             return Ok(users);
         }
 
-        [HttpGet("{id}")]
+        [Authorize(Role.Admin)]
+        [HttpGet("GetById/{id}")]
         public IActionResult GetById(int id)
         {
             var user = _userService.GetById(id);
@@ -69,6 +71,14 @@ namespace WebAPI.Controllers
         {
             _userService.Delete(id);
             return Ok(new { message = "User deleted successfully" });
+        }
+
+        [Authorize(Role.Admin)]
+        [HttpGet("GetUsersPaginated")]
+        public IActionResult GetUsersPaginated(int pageNumber, int pageSize)
+        {
+            var res = _userService._GetUsersPaginated(pageNumber, pageSize);
+            return Ok(new { data = res, totalCount = _userService.GetAll().Count() });
         }
     }
 }

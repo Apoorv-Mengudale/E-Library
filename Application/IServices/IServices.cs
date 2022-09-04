@@ -14,6 +14,5 @@ namespace Application.IServices
         void Update(T entity);
         void Delete(T entity);
         void Remove(T entity);
-
     }
 }
